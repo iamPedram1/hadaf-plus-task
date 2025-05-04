@@ -28,7 +28,10 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "types": ["vite/client"],
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "paths": {
+      "src/*": ["./src/*"]
+    }
   },
   "include": ["src"]
 }
