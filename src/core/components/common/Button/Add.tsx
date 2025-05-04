@@ -20,12 +20,6 @@ const AddButton: React.FC<AddButtonProps> = (props) => {
     ...otherProps
   } = props;
 
-  // States
-
-  // Hooks
-
-  // Utilities
-
   // Render
   return (
     <Button iconPosition={iconPosition} icon={icon} {...otherProps}>

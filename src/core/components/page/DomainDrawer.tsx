@@ -53,7 +53,7 @@ const DomainDrawer: React.FC<DomainDrawerProps> = (props) => {
 
   // Context
   const { control, reset, handleSubmit } = useFormContext<DomainDataProps>();
-  const { onSetNotification } = useNotificationContext();
+  const { setNotification } = useNotificationContext();
 
   // Hooks
   useUpdateEffect(() => {
@@ -71,14 +71,16 @@ const DomainDrawer: React.FC<DomainDrawerProps> = (props) => {
     const domainTitle = sanitizeString(payload.domain).trim();
 
     if (domainTitle.length === 0) {
-      return onSetNotification('error', {
+      return setNotification({
+        type: 'error',
         message: 'Error',
         description: "Domain can't be empty.",
       });
     }
 
     if (!isValidUrl(domainTitle)) {
-      return onSetNotification('error', {
+      return setNotification({
+        type: 'error',
         message: 'Error',
         description: 'Invalid Link',
       });
@@ -93,13 +95,20 @@ const DomainDrawer: React.FC<DomainDrawerProps> = (props) => {
       })
         .unwrap()
         .then(() => {
-          onSetNotification('success', {
+          setNotification({
+            type: 'success',
             message: 'Success',
             description: 'Domain created successfully.',
           });
           onClose();
         })
-        .catch((err) => err);
+        .catch((err) => {
+          setNotification({
+            type: 'error',
+            message: 'Error',
+            description: err?.data || 'An error occured in adding domain.',
+          });
+        });
     } else {
       updateDomain({
         ...(payload as DomainProps),
@@ -107,13 +116,21 @@ const DomainDrawer: React.FC<DomainDrawerProps> = (props) => {
       })
         .unwrap()
         .then(() => {
-          onSetNotification('success', {
+          setNotification({
+            type: 'success',
             message: 'Success',
             description: 'Domain updated successfully.',
           });
           onClose();
         })
-        .catch((err) => err);
+
+        .catch((err) => {
+          setNotification({
+            type: 'error',
+            message: 'Error',
+            description: err?.data || 'An error occured in updating domain.',
+          });
+        });
     }
   };
 

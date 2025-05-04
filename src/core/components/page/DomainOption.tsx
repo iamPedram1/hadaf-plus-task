@@ -41,20 +41,22 @@ const DomainOption = (props: DomainOptionProps) => {
   const loading = deleteResult.isLoading || updateResult.isLoading;
 
   // Context
-  const { onSetNotification } = useNotificationContext();
+  const { setNotification } = useNotificationContext();
 
   // Utilities
   const handleDeleteDomain = React.useCallback(() => {
     deleteDomain(domain.id)
       .unwrap()
       .then(() => {
-        onSetNotification('success', {
+        setNotification({
+          type: 'success',
           message: 'Success',
           description: 'Domain deleted succesfuly.',
         });
       })
       .catch((err) => {
-        onSetNotification('error', {
+        setNotification({
+          type: 'error',
           message: '404 Not Found',
           description: err?.data || `An error occured in deleting domain`,
         });
@@ -66,7 +68,8 @@ const DomainOption = (props: DomainOptionProps) => {
       updateDomain({ ...domain, status })
         .unwrap()
         .catch((err) => {
-          onSetNotification('error', {
+          setNotification({
+            type: 'error',
             message: 'Failed',
             description: err?.data || `An error occured in updating`,
           });

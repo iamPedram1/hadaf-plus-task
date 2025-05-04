@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 // Context
 import NotificationProvider from 'core/store/contexts/Notification';
 import AntDesignProvider from 'core/store/contexts/AntDesign';
+import ReduxProvider from 'core/store/contexts/Redux';
 
 // Custom Types
 interface ProvidersProps {
@@ -17,9 +18,11 @@ const Providers: React.FC<ProvidersProps> = (props) => {
   // Render
   return (
     <BrowserRouter>
-      <AntDesignProvider>
-        <NotificationProvider>{children}</NotificationProvider>
-      </AntDesignProvider>
+      <ReduxProvider>
+        <AntDesignProvider>
+          <NotificationProvider>{children}</NotificationProvider>
+        </AntDesignProvider>
+      </ReduxProvider>
     </BrowserRouter>
   );
 };

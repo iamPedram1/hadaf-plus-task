@@ -5,14 +5,13 @@ import { notification } from 'antd';
 import type { NotificationArgsProps } from 'antd';
 
 interface NotificationContextProps {
-  onSetNotification: (
-    open: NotificationType,
-    args: NotificationArgsProps
+  setNotification: (
+    args: NotificationArgsProps & { type: NotificationType }
   ) => void;
 }
 
 const NotificationContext = createContext<NotificationContextProps>({
-  onSetNotification: () => {},
+  setNotification: () => {},
 });
 
 interface NotificationProps {
@@ -29,18 +28,17 @@ const NotificationProvider: React.FC<NotificationProps> = (props) => {
   const [api, contextHolder] = notification.useNotification();
 
   const handleOpenNotification = (
-    type: NotificationType,
-    payload: NotificationArgsProps
+    args: NotificationArgsProps & { type: NotificationType }
   ) => {
-    api[type]({
+    api[args?.type]({
       placement: 'topLeft',
-      ...payload,
+      ...args,
     });
   };
 
   return (
     <NotificationContext.Provider
-      value={{ onSetNotification: handleOpenNotification }}
+      value={{ setNotification: handleOpenNotification }}
     >
       {contextHolder}
       {children}
