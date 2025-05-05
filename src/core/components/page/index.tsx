@@ -23,7 +23,7 @@ interface HomePageProps {}
 
 const HomePage: React.FC<HomePageProps> = (props) => {
   // States
-  const openDomainDrawer = useBoolean(false);
+  const openDomainDrawer = useBoolean();
   const [selectedDomainId, setSelectedDomainId] = React.useState('');
 
   // Hooks

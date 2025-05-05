@@ -9,8 +9,6 @@ export interface UseBooleanReturnProps {
   setFalse: () => void;
 }
 
-interface UseBooleanOptionsProps {}
-
 /**
  * A custom hook that manages a boolean state with optional callbacks for state changes.
  *

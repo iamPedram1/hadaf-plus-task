@@ -1,7 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { DomainDataProps, DomainProps } from 'core/types/domain';
+
+// Custom Utilities
 import { apiBaseUrl } from 'core/utilities/env';
-import { sanitize } from 'core/utilities/helper/sanitize';
+import { sanitize } from 'core/utilities/helper';
+
+// Custom Types
+import type { DomainDataProps, DomainProps } from 'core/types/domain';
 
 const tagType = 'Domain';
 

@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { Controller, useForm } from 'react-hook-form';
 
 // Core Components
 import Input from 'core/components/base/Input';
@@ -8,8 +10,6 @@ import SearchOutlinedIcon from 'core/components/icon/SearchOutlined';
 
 // Custom Utilities
 import { debounce, sanitizeString } from 'core/utilities/helper';
-import { Controller, useForm } from 'react-hook-form';
-import { useSearchParams } from 'react-router-dom';
 
 // Custom Types
 interface SearchbarProps {}

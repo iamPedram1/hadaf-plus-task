@@ -20,8 +20,7 @@ import RowBox from 'core/components/common/Box/RowBox';
 import { useNotificationContext } from 'core/store/contexts/Notification';
 
 // Custom Utilities
-import { sanitizeString } from 'core/utilities/helper/sanitize';
-import { isValidUrl } from 'core/utilities/helper/validation';
+import { isValidUrl, sanitizeString } from 'core/utilities/helper';
 import {
   useAddDomainMutation,
   useLazyGetDomainQuery,
@@ -170,11 +169,7 @@ const DomainDrawer: React.FC<DomainDrawerProps> = (props) => {
               control={control}
               name='isActive'
               render={({ field: { value, ...field } }) => (
-                <Checkbox
-                  disabled={loading}
-                  checked={value}
-                  onChange={field.onChange}
-                >
+                <Checkbox disabled={loading} checked={value} {...field}>
                   Active
                 </Checkbox>
               )}
