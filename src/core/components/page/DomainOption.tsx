@@ -57,7 +57,7 @@ const DomainOption = (props: DomainOptionProps) => {
       .catch((err) => {
         setNotification({
           type: 'error',
-          message: '404 Not Found',
+          message: err.status === 404 ? '404 Not Found' : 'Failed',
           description: err?.data || `An error occured in deleting domain`,
         });
       });

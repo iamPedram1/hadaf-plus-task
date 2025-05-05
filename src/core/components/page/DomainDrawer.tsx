@@ -57,7 +57,18 @@ const DomainDrawer: React.FC<DomainDrawerProps> = (props) => {
 
   // Hooks
   useUpdateEffect(() => {
-    if (open && domainId) getDomain(domainId);
+    if (open && domainId) {
+      getDomain(domainId)
+        .unwrap()
+        .catch((err) => {
+          setNotification({
+            type: 'error',
+            message: err.status === 404 ? '404 Not Found' : 'Failed',
+            description:
+              err?.data || `An error occured in fetching domain data`,
+          });
+        });
+    }
   }, [open, mode, domainId]);
 
   useUpdateEffect(() => {
