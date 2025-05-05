@@ -169,8 +169,12 @@ const DomainDrawer: React.FC<DomainDrawerProps> = (props) => {
             <Controller
               control={control}
               name='isActive'
-              render={({ field }) => (
-                <Checkbox disabled={loading} {...field}>
+              render={({ field: { value, ...field } }) => (
+                <Checkbox
+                  disabled={loading}
+                  checked={value}
+                  onChange={field.onChange}
+                >
                   Active
                 </Checkbox>
               )}
